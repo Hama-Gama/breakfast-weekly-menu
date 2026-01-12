@@ -3,7 +3,6 @@ import WeeklyBreakfastPlanner from './components/WeeklyBreakfastPlanner'
 
 
 function App() {
-	    const notify = () => toast('Wow so easy!')
   return (
 		<div>
 			<WeeklyBreakfastPlanner />

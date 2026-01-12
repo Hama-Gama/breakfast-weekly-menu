@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "./ui/badge";
 import { Clock } from "lucide-react";
+import { Button } from "./ui/button";
 
 const WEEK_MENU = [
 {
@@ -58,14 +59,15 @@ return d;
 });
 };
 
-
 const formatDate = (date: Date) =>
-date.toLocaleDateString("ru-RU", {
-weekday: "long",
-day: "2-digit",
-month: "2-digit",
-year: "numeric",
-});
+	date
+		.toLocaleDateString('ru-RU', {
+			weekday: 'long',
+			day: '2-digit',
+			month: '2-digit',
+			year: 'numeric',
+		})
+		.replace(' г.', '')
 
 
 // ====== компонент ======
@@ -78,7 +80,7 @@ const dates = getWeekDatesFromToday();
 
 
 return (
-	<div className='space-y-4 px-[10px] py-[15px] text-2xl'>
+	<div className='max-w-[500px] m-auto space-y-4 px-[10px] py-[15px] text-2xl'>
 		{dates.map((date, offset) => {
 			const dayIndex = (todayDayIndex + offset) % 7
 			const menu = WEEK_MENU.find(m => m.dayIndex === dayIndex)!
@@ -93,10 +95,12 @@ return (
 						<CardTitle className='text-lg capitalize'>
 							{formatDate(date)}
 						</CardTitle>
-						{isToday && <Badge className="text-lg px-4">Сегодня</Badge>}
+						{isToday && <Badge className='text-lg px-4'>Сегодня</Badge>}
 					</CardHeader>
 					<CardContent className='space-y-2'>
-						<div className='font-semibold text-lg'>{menu.title}</div>
+						<Badge className='px-6 h-auto'>
+							<div className='font-semibold text-lg'>{menu.title}</div>
+						</Badge>
 
 						<ul className='list-disc pl-5 text-lg text-muted-foreground'>
 							{menu.ingredients.map(i => (
